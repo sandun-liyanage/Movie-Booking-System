@@ -21,9 +21,11 @@ const moviesRouter = require('./routes/movies')
 app.use('/movies', moviesRouter)
 app.use('/', indexRouter)
 
+mongoose.set('strictQuery', true)
 mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true})
 const db = mongoose.connection
 db.on('error', (error) => console.error(error))
 db.once('open', () => console.log('database connected'))
+
 
 app.listen(3000, () => console.log('Server started at 3000'))
