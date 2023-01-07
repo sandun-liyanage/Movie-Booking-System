@@ -17,6 +17,8 @@ jobs:
       - run: npm ci
       - run: npm install
       - run: node server.js
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.DATABASE_URL}}
 
   publish-npm:
     needs: build
