@@ -16,7 +16,6 @@ jobs:
       - uses: actions/setup-node@v3
       - run: npm ci
       - run: npm install
-      - run: node server.js
         env:
           DATABASE_URL: ${{secrets.DATABASE_URL}}
 
