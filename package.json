@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node server.js && exit 1",
     "devStart": "nodemon server.js"
   },
   "author": "BSU Liyanage",
