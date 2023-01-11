@@ -7,7 +7,7 @@ var adminSchema=mongoose.Schema(
 	password: String,
 	isAdmin: {
         type: Boolean,
-        default: false
+        default: true
     }
 });
 

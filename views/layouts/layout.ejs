@@ -33,31 +33,23 @@
                   <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="#">Home</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Book Movies</a>
-                  </li>
-                </ul>
 
-                
-
-                <ul class="nav navbar-right navbar-nav">  
-                    <% if(!admin){%> 
-                        <li><a href="/admin/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                        <li><a href="/admin/signup"><span class="glyphicon glyphicon-user"> SignUp</a></li>
+              
+                  <% if(!admin){%> 
+                    <li class="nav-item"><a class="nav-link" href="#">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Signup</a></li>
  
-                         
-                    <% }else if(admin.isAdmin){%>
-                        <li><a href="/screening">Screening Movies <span class="glyphicon glyphicon-shopping-cart"></span></a></li>
-                        <li><a href="/movie">Manage Movies <span class="glyphicon glyphicon-shopping-cart"></span></a></li>
-                        <li><a href="/screening/new">Manage Screens<span class="glyphicon glyphicon-leaf"></span></a></li>
-                        <li><a href="/admin/logout">Logout</a></li>
+                  <% }else if(isAdmin){%>
+                    <li class="nav-item"><a class="nav-link" href="#">Screening Movies</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Manage Movies</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Manage Screens</a></li>
+                      
  
-                    <%}else{%>
-                        <li><a href="/profile/<%=admin._id%>">Welcome <%=admin.username%></a></li>
-                        <li><a href="/profile/<%=admin._id%>">Profile <span class="glyphicon glyphicon-shopping-cart"></span></a></li>
-                        <li><a href="/admin/logout">Logout</a></li>
-                    <%};%>
-                   </ul>  
+                  <%}else{%>
+                    <li class="nav-item"><a class="nav-link" href="#">Book Movies</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Profile</a></li>
+                  <%};%>
+                </ul>  
                    
               </div>
             </div>
