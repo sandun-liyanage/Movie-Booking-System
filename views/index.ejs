@@ -1,9 +1,15 @@
+<% var message; if(message){ %>
+    <div class="alert alert-success" role="alert">
+        <%= message %>
+    </div>
+    <% } %>
 <style>
     h1 {
         text-align: center;
     }
 
     .bg-image {
+        top: 0;
         background-image: url("index.jpg");
         height: 700px;
         background-position: center;
@@ -17,7 +23,7 @@
         font-weight: bold;
         border: 3px solid white;
         position: absolute;
-        top: 15%;
+        top: 25%;
         margin-left: 10%;
         width: 80%;
         padding: 30px;
@@ -27,6 +33,9 @@
         box-shadow: 5px 10px red;
     }
 </style>
+
+
+
 
 <div class="bg-image"></div>
 <div class="bg-text">

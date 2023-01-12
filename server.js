@@ -11,6 +11,7 @@ const mongoose = require('mongoose')
 const expressLayouts = require('express-ejs-layouts')
 const methodOverride = require("method-override")
 const admin = require('./models/admin')
+const User = require('./models/user')
 const flash = require("express-flash")
 const bcrypt = require('bcrypt')
 const bodyParser = require('body-parser')
@@ -20,7 +21,7 @@ const connectEnsureLogin = require('connect-ensure-login');// authorization
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 app.use(express.json())
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 
 
 
@@ -33,10 +34,12 @@ app.use(session({
   store: new MongoStore({ mongoUrl: process.env.DATABASE_URL })
 }));
 
-const strategy = new LocalStrategy(admin.authenticate())
-passport.use('local', strategy);
-passport.serializeUser(admin.serializeUser());
-passport.deserializeUser(admin.deserializeUser());
+app.use(flash());
+
+const userStrategy = new LocalStrategy(User.authenticate())
+passport.use('local', userStrategy);
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -53,12 +56,12 @@ app.use(methodOverride("_method"))
 
 
 const indexRouter = require('./routes/index')
-const moviesRouter = require('./routes/movies')
 const authenticateRouter = require('./routes/authenticate')
+const moviesRouter = require('./routes/movies')
 
-app.use('/movies', moviesRouter)
 app.use('/', indexRouter)
 app.use('/authenticate', authenticateRouter)
+app.use('/movies', moviesRouter)
 
 
 mongoose.set('strictQuery', true)
@@ -67,31 +70,9 @@ const db = mongoose.connection
 db.on('error', (error) => console.error(error)) 
 db.once('open', () => {
     console.log('database connected')
-    admin.register(
-        new admin({ 
-          username: "admin"
-        }), "admin", function (err, msg) {
-            if (err) {
-                //console.log(err);
-            } else {
-                console.log({ message: "Successful" });
-            }
-        }
-    )
+    admin.insertMany({"username": "admin" , "password" : "admin"})
 })
 
-
-app.use(function (req, res, next) {
-	console.log(req.session.username);
-	//we pass the currentUser variable to every ejs tenplate which contains the info of current user
-	res.locals.admin = req.session.username;
-	res.locals.error = req.flash("error");
-	res.locals.success = req.flash("success");
-	next();
-});
-
-app.locals.admin = ""
-app.locals.messages = ""
 
 
 

@@ -1,0 +1,50 @@
+
+<style>
+    #outerDiv {
+        width: 40%;
+        margin-left: 30%;
+        padding: 2em;
+    }
+</style>
+
+<% var message; if(message){ %>
+    <div class="alert alert-success" role="alert">
+        <%= message %>
+    </div>
+    <% } %>
+   
+    <div id="outerDiv" class="border border-danger-subtle">
+    <form action="/movies/addMovie" method="post" >
+        <div class="mb-3">
+            <label for="movieName" class="form-label">Movie Name</label>
+            <input type="text" class="form-control border border-danger-subtle" id="movieName" name="movieName">
+        </div>
+        <div class="mb-3">
+            <label for="img" class="form-label">Image URL</label>
+            <input type="text" class="form-control border border-danger-subtle" id="img" name="img">
+        </div>
+        <div class="preview-images"></div>
+        <div class="mb-3">
+            <label for="ratings" class="form-label">Ratings</label>
+            <input type="text" class="form-control border border-danger-subtle" id="ratings" name="ratings">
+        </div>
+        <div class="mb-3">
+            <label for="director" class="form-label">Director</label>
+            <input type="text" class="form-control border border-danger-subtle" id="director" name="director">
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <input type="text" class="form-control border border-danger-subtle" id="description" name="description">
+        </div>
+        <div class="mb-3">
+            <label for="releaseDate" class="form-label">Release Date</label>
+            <input type="text" class="form-control border border-danger-subtle" id="releaseDate" name="releaseDate">
+        </div>
+        <div class="mb-3">
+            <label for="duration" class="form-label">Duration</label>
+            <input type="text" class="form-control border border-danger-subtle" id="duration" name="duration">
+        </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    </div>
+

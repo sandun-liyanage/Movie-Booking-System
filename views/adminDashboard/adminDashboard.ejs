@@ -1,0 +1,73 @@
+<style>
+    #bg-img {
+        
+        background-image: url("/adminDashboard.jpg");
+        height: 700px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        z-index: 0;
+    }
+    #card {
+        width: 30%;
+        display: inline-grid;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+    #outerDiv {
+        margin-left: 10%;
+        position: absolute;
+        top: 200px;
+        z-index: 1;
+        width: 80%;
+    }
+</style>
+
+<% var message; if(message){ %>
+    <div class="alert alert-success" role="alert">
+        <%= message %>
+    </div>
+    <% } %>
+
+<div id="bg-img"></div>
+<div id="outerDiv">
+<div class="card text-center text-bg-dark mb-3" id="card">
+    <div class="card-header">
+      
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Add Movies</h5>
+      <p class="card-text">Add new movies to the system. These movies will be available for users for booking</p>
+        <a href="../movies/addMovie" class="btn btn-primary">click here</a>
+    </div>
+    <div class="card-footer text-muted">
+      2 days ago
+    </div>
+  </div>
+  <div class="card text-center text-bg-dark mb-3" id="card">
+    <div class="card-header">
+      
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Edit Movie Details</h5>
+      <p class="card-text">Edit or update details of previously added movies.</p>
+      <a href="../movies/updateMovie" class="btn btn-primary">click here</a>
+    </div>
+    <div class="card-footer text-muted">
+      2 days ago
+    </div>
+  </div>
+  <div class="card text-center text-bg-dark mb-3" id="card">
+    <div class="card-header">
+      
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Delete Movies</h5>
+      <p class="card-text">Delete previously added movies from the system permanently.</p>
+      <a href="#" class="btn btn-primary">click here</a>
+    </div>
+    <div class="card-footer text-muted">
+      2 days ago
+    </div>
+  </div>
+  </div>
