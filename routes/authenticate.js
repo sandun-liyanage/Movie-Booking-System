@@ -19,21 +19,6 @@ router.use(flash())
 router.use(express.urlencoded({extended: true}));
 
 
-//----------------------admin login----------------------//
-
-router.get('/adminLogin', (req, res) => {
-    res.render('./users/adminLogin', {message: null})
-})
-
-router.post('/adminLogin', (req,res) => {
-    if(req.body.username == "admin" && req.body.password == "admin"){
-        res.render('./adminDashboard/adminDashboard')
-    }else{
-        res.render('./users/adminLogin', {message: "error.. invalid credentials"})
-    }
-});
-
-
 
 
 //----------------------user login----------------------//
@@ -73,6 +58,24 @@ router.post('/userSignup', function (req, res) {
     )
 })
   
+
+//----------------------admin login and logout----------------------//
+
+router.get('/adminLogin', (req, res) => {
+    res.render('./users/adminLogin', {message: null})
+})
+
+router.post('/adminLogin', (req,res) => {
+    if(req.body.username == "admin" && req.body.password == "admin"){
+        res.render('./adminDashboard/adminDashboard')
+    }else{
+        res.render('./users/adminLogin', {message: "error.. invalid credentials"})
+    }
+});
+
+router.get('/adminLogout', (req, res) => {
+    res.redirect('../' )
+})
 
 
 //---------------------user/admin logout---------------//

@@ -16,7 +16,7 @@
     <div id="outerDiv" class="border border-danger-subtle">
         <h1>Update Movie Details</h1>
         <p>Enter the movie name of the movie you wish to edit details of and other input fields will be updated accordingly</p>
-    <form action="/movies/updateMovie" method="patch" >
+    <form action="/movies/updateMovie?_method=PATCH" method="post" >
         <div class="mb-3">
             <label for="movieName" class="form-label">Movie Name</label>
             <input type="text" class="form-control border border-danger-subtle" id="movieName" name="movieName">

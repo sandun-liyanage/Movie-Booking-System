@@ -1,0 +1,16 @@
+<% var message; if(message){ %>
+    <div class="alert alert-success" role="alert">
+        <%= message %>
+    </div>
+    <% } %>
+
+    
+<form action="/movies/deleteMovie?_method=DELETE" method="post">
+    <h1>Delete Movie Details</h1>
+    <p>Enter the movie name of the movie you want to delete and click "Delete Movie" to delete the movie</p>
+    <div class="mb-3">
+        <label for="movieName" class="form-label">Movie Name</label>
+        <input type="text" class="form-control" id="movieName" name="movieName">
+    </div>
+    <button type="submit" class="btn btn-primary">Delete Movie</button>
+</form>

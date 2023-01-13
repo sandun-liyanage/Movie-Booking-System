@@ -3,10 +3,13 @@ const router = express.Router()
 const Movie = require('../models/movies')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
+const methodOverride = require("method-override")
+const { response } = require('express')
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 router.use(express.json())
 router.use(express.urlencoded({ extended: true }));
+router.use(methodOverride('_method'))
 
 //getting all movies
 /*router.get('/', (req, res) => {
@@ -51,27 +54,34 @@ router.get('/updateMovie', (req, res) => {
     res.render('./adminDashboard/updateMovies')
 })
 
-
 router.patch('/updateMovie', (req, res) => {
-    Movie.updateMany({'movieName': req.body.movieName ,$set:{
-        'img': req.body.img, 
-        'ratings': req.body.ratings,
-        'director': req.body.director,
-        'description': req.body.description,
-        'releaseDate': req.body.releaseDate,
-        'duration': req.body.duration
-    }}, function (err, success){
-        if (err){
-            res.render('./adminDashboard/updateMovies', {message: err})
-        }else{
-            res.render('./adminDashboard/adminDashboard', {message: "movie updated successfully"})
-        }
+    Movie.updateMany({'movieName': req.body.movieName}, req.body, 
+        function (err, success){
+            if(err){
+                res.render('./adminDashboard/updateMovies', {message: err})
+            }else{
+                res.render('./adminDashboard/adminDashboard', {message: "successfully updated movie details"})
+            }
     })
 })
 
-//deleting a movies
-router.delete('/:id', (req, res) => {
 
+
+//deleting a movies
+
+router.get('/deleteMovie', (req, res) => {
+    res.render('./adminDashboard/deleteMovies')
+})
+
+
+router.delete('/deleteMovie', (req, res) => {
+    Movie.deleteMany({'movieName' : req.body.movieName}, function(err, success){
+        if(err){
+            res.render('./adminDashboard/deleteMovies', {message: err})
+        }else{
+            res.render('./adminDashboard/adminDashboard', {message: "successfully deleted movie details"})
+        }
+    })
 })
 
 module.exports = router
