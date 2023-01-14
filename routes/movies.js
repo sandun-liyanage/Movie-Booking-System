@@ -19,7 +19,7 @@ router.get('/screeningMovies', (req, res) => {
             //console.log(docs)
             res.render("./userDashboard/screeningMovies", {data: docs});
         } else {
-            console.log('Failed to retrieve the Course List: ' + err);
+            console.log('Failed to retrieve the movie List: ' + err);
         }
     });
 })
@@ -41,10 +41,10 @@ router.post('/addMovie', function (req, res) {
         username: req.body.movieName,
         movieName: req.body.movieName, 
         img: req.body.img, 
+        timeSlot: req.body.timeSlot,
         ratings: req.body.ratings,
         director: req.body.director,
         description: req.body.description,
-        releaseDate: req.body.releaseDate,
         duration: req.body.duration
     }), function (err, msg) {
         if(err){

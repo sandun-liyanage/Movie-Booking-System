@@ -25,6 +25,16 @@
             <label for="img" class="form-label">Image URL</label>
             <input type="text" class="form-control border border-danger-subtle" id="img" name="img">
         </div>
+        <div class="mb-3">
+            <select name="timeSlot" id="timeSlot" class="form-select border border-danger-subtle" aria-label="Default select example">
+                <option selected>Choose a time slot</option>
+                <option value="9.30 AM">9.30 AM</option>
+                <option value="12.30 PM">12.30 PM</option>
+                <option value="3.30 PM">3.30PM</option>
+                <option value="7.30 PM">7.30 PM</option>
+                <option value="9.30 PM">9.30PM</option>
+              </select>
+        </div>
         <div class="preview-images"></div>
         <div class="mb-3">
             <label for="ratings" class="form-label">Ratings</label>
@@ -37,10 +47,6 @@
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
             <input type="text" class="form-control border border-danger-subtle" id="description" name="description">
-        </div>
-        <div class="mb-3">
-            <label for="releaseDate" class="form-label">Release Date</label>
-            <input type="text" class="form-control border border-danger-subtle" id="releaseDate" name="releaseDate">
         </div>
         <div class="mb-3">
             <label for="duration" class="form-label">Duration</label>

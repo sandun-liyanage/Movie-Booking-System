@@ -3,17 +3,14 @@ const passportLocalMongoose = require("passport-local-mongoose")
 
 var moviesSchema=mongoose.Schema(
 {
-	movieName: String,
-	img: String,
+	movieName: {type: String, required: true},
+	img: {type: String, required: true},
+	timeSlot: {type: String, required: true, unique: true},
 	ratings: Number,
 	director: String,
 	description: String,
-	releaseDate: String,
-	duration: String,
-    seats: [{
-        id: String,
-        available: Boolean
-    }]
+	duration: String
+    
 });
 
 moviesSchema.plugin(passportLocalMongoose)

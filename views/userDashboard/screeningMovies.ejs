@@ -38,11 +38,14 @@
                     <td rowspan="8" style="padding: 1em;"><img src="<%=data[i].img %>" alt="Movie Poster" width="300" height="350"></td>
                     <td></td>
                     <td rowspan="8" style="padding-top: 150px;">
-                        <a href="/reservation/bookMovie?docs=<%= data[i] %>">Book</a>
+                        <a href="/reservation/bookMovie?movieName=<%= data[i].movieName %>">Book</a>
                     </td>
                 </tr>
                 <tr>
                     <td>Movie Name: <%= data[i].movieName %></td>
+                </tr>
+                <tr>
+                    <td>Time Slot: <%= data[i].timeSlot %></td>
                 </tr>
                 <tr>
                     <td>Ratings: <%= data[i].ratings %></td>
@@ -52,9 +55,6 @@
                 </tr>
                 <tr>
                     <td>Description: <%= data[i].description %></td>
-                </tr>
-                <tr>
-                    <td>Release Date: <%= data[i].releaseDate %></td>
                 </tr>
                 <tr>
                     <td>Duration: <%= data[i].duration %></td>

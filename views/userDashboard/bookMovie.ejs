@@ -1,0 +1,61 @@
+<% var message; if(message){ %>
+    <div class="alert alert-success" role="alert">
+        <%= message %>
+    </div>
+<% } %>
+
+<style>
+    h1,h2,h5 {
+        text-align: center;
+    }
+    td {
+        width: 40%;
+        padding: 2em;
+    }
+    table{
+        width: 80%;
+    }
+    #screen {
+        width: 90%;
+        height: 30px;
+        background-color: brown;
+        border-radius: 10px;
+        margin: auto;
+        color: white;
+        text-align: center;
+    }
+</style>
+
+<h1>Book Movie - <%= movieName %> </h1>
+<h2>Show Time - <%= timeSlot %> </h2>
+
+<br><br>
+<table>
+<tr>
+    <td>
+        <img src="<%= img %> ">
+    </td>
+    <td>
+        <form>
+            <div class="mb-3">
+                <label for="username" class="form-label">User Name</label>
+                <input type="text" value="<%= name %>" disabled class="form-control border border-danger-subtle" id="username" name="username">
+            </div>
+            <div class="mb-3">
+                <label for="movieName" class="form-label">Date</label>
+                <input type="date" class="form-control border border-danger-subtle" id="date" name="date">
+            </div>
+            <div class="mb-3">
+                <label for="numOfSeats" class="form-label">Number of Seats</label>
+                <input type="text" class="form-control border border-danger-subtle" id="numOfSeats" name="numOfSeats">
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Check availability</button>            
+        </form>
+    </td>
+</tr>
+</table>
+
+<h5>Select Your Seats</h5>
+<br>
+<div id="screen">Screen This Way</div>
