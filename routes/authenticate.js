@@ -74,14 +74,16 @@ router.post('/adminLogin', (req,res) => {
 });
 
 router.get('/adminLogout', (req, res) => {
-    res.redirect('../' )
+    res.redirect('/' )
 })
 
 
 //---------------------user/admin logout---------------//
 router.delete('/logout', (req, res) => {
-    req.logOut()
+    req.logout(function(err) {
+        if (err) { return next(err); }
     res.redirect('/')
+    })
 })
   
 

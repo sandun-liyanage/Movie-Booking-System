@@ -1,0 +1,73 @@
+<style>
+    td{
+        color: white;
+        width:350px;
+    }
+    #outerDiv {
+        width: 70%;
+        margin: auto;
+    }
+    body {
+        background-color: #333;
+    }
+    #btn {
+        float: right;
+        margin-left: 85em;
+        margin-top: 1em;
+        position: fixed;
+    }
+</style>
+
+<% var message; if(message){ %>
+    <div class="alert alert-success" role="alert">
+        <%= message %>
+    </div>
+<% } %>
+
+<form action="/authenticate/logout?_method=DELETE" method="post">
+    <button class="btn btn-success" id="btn">Logout</button>
+</form>
+
+<div id="outerDiv">
+<table class="table table-dark table-borderless">
+    
+    <tbody>
+        <% if(data.length){ for(var i = 0; i< data.length; i++) {%>  
+                
+                <tr>
+                    <td rowspan="8" style="padding: 1em;"><img src="<%=data[i].img %>" alt="Movie Poster" width="300" height="350"></td>
+                    <td></td>
+                    <td rowspan="8" style="padding-top: 150px;">
+                        <a href="/reservation/bookMovie?docs=<%= data[i] %>">Book</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Movie Name: <%= data[i].movieName %></td>
+                </tr>
+                <tr>
+                    <td>Ratings: <%= data[i].ratings %></td>
+                </tr>
+                <tr>
+                    <td>Director: <%= data[i].director %></td>
+                </tr>
+                <tr>
+                    <td>Description: <%= data[i].description %></td>
+                </tr>
+                <tr>
+                    <td>Release Date: <%= data[i].releaseDate %></td>
+                </tr>
+                <tr>
+                    <td>Duration: <%= data[i].duration %></td>
+                </tr>
+                <tr>
+                    <td><hr></td>
+                </tr>
+                
+            <% }}else{ %>
+            <tr>
+                <td colspan="3">No user</td>
+            </tr>
+            <% } %>     
+    </tbody>
+</table>
+</div>

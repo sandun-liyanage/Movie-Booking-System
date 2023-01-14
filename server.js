@@ -58,10 +58,12 @@ app.use(methodOverride("_method"))
 const indexRouter = require('./routes/index')
 const authenticateRouter = require('./routes/authenticate')
 const moviesRouter = require('./routes/movies')
+const reservationRouter = require('./routes/reservation')
 
 app.use('/', indexRouter)
 app.use('/authenticate', authenticateRouter)
 app.use('/movies', moviesRouter)
+app.use('/reservation', reservationRouter)
 
 
 mongoose.set('strictQuery', true)

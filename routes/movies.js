@@ -11,11 +11,20 @@ router.use(express.json())
 router.use(express.urlencoded({ extended: true }));
 router.use(methodOverride('_method'))
 
+
 //getting all movies
-/*router.get('/', (req, res) => {
-    res.send('hello')
+router.get('/screeningMovies', (req, res) => {
+    Movie.find((err, docs) => {
+        if (!err) {
+            //console.log(docs)
+            res.render("./userDashboard/screeningMovies", {data: docs});
+        } else {
+            console.log('Failed to retrieve the Course List: ' + err);
+        }
+    });
 })
 
+/*
 //getting one movie
 router.get('/:id', (req, res) => {
 
