@@ -8,12 +8,12 @@
     h1,h2,h5 {
         text-align: center;
     }
-    td {
-        width: 40%;
+    .ddd {
         padding: 2em;
     }
     table{
         width: 80%;
+        margin: auto;
     }
     #screen {
         width: 90%;
@@ -24,38 +24,138 @@
         color: white;
         text-align: center;
     }
+    #imgContainer {
+        width: 450px;
+    }
+    #btn {
+        text-align: center;
+    }
+    body {
+        background-image: url('/booking.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        color: white;
+        background-position: center;
+    }
+    input.checkBox {
+        width : 2em;
+        height : 2em;
+    }
 </style>
 
+<br><br>
 <h1>Book Movie - <%= movieName %> </h1>
 <h2>Show Time - <%= timeSlot %> </h2>
 
 <br><br>
+
 <table>
 <tr>
-    <td>
-        <img src="<%= img %> ">
+    <td id="imgContainer">
+        <img src="<%= img %> " height="400px" width="350px">
     </td>
     <td>
-        <form>
+        
             <div class="mb-3">
                 <label for="username" class="form-label">User Name</label>
                 <input type="text" value="<%= name %>" disabled class="form-control border border-danger-subtle" id="username" name="username">
             </div>
             <div class="mb-3">
-                <label for="movieName" class="form-label">Date</label>
-                <input type="date" class="form-control border border-danger-subtle" id="date" name="date">
+                <label for="movieName" class="form-label">Movie Name</label>
+                <input type="text" value="<%= movieName %>" disabled class="form-control border border-danger-subtle" id="movieName" name="movieName">
             </div>
             <div class="mb-3">
-                <label for="numOfSeats" class="form-label">Number of Seats</label>
-                <input type="text" class="form-control border border-danger-subtle" id="numOfSeats" name="numOfSeats">
+                <label for="movieName" class="form-label">Date</label>
+                <input type="date" value="<%= date %>" disabled class="form-control border border-danger-subtle" id="date" name="date">
+            </div>
+            <div class="mb-3">
+                <label for="timeSlot" class="form-label">Show Time</label>
+                <input type="text" value="<%= timeSlot %>" disabled class="form-control border border-danger-subtle" id="timeSlot" name="timeSlot">
             </div>
             <br>
-            <button type="submit" class="btn btn-primary">Check availability</button>            
-        </form>
     </td>
 </tr>
-</table>
+<tr>
+    <td colspan="2">
+        <br><br><br><br>
+        <form action="/reservation/bookMovie?movieName=<%= movieName %> " method="post">
+        <h5>Select Your Seats</h5>
+        <br>
+        <div id="screen">Screen This Way</div>
 
-<h5>Select Your Seats</h5>
+        <div class="seatStructure txt-center" style="overflow-x:auto;">
+            <table id="seatsBlock">
+                <p id="notification"></p>
+                <tr>
+                    <td></td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td></td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td>8</td>
+                    <td>9</td>
+                    <td>10</td>
+                   <br><br>
+                </tr>
+                <tr>
+                    <td> <br>A</td>
+                   <%for(var i=1;i<=10;i++){%>
+                    <% //for(var j=0; j<seats.length;j++){ %> 
+                   <% if(seats.includes(i)){ %>
+                   <td>
+                    <br>
+                       <input type="checkbox" class="checkBox" disabled name="checkList" value=<%= i %>>
+                   </td>
+                   <%} else {%>
+                   <td>
+                    <br>
+                    <input type="checkbox" class="checkBox" name="checkList" value=<%= i %>>
+                   </td>
+                   <%}if(i==5){%>
+                        <td></td>
+                        <%}%>
+                   <%};%>
+
+
+                </tr>
+                 <tr>
+                    <td><br>B</td>
+                   <%for(var i=11;i<=20;i++){%>
+
+                   <% if(seats.includes(i)){%>
+                   <td>
+                    <br>
+                    <input type="checkbox" class="checkBox" disabled name="checkList" value=<%= i %>>
+                   </td>
+                   <%} else {%>
+                   <td>
+                    <br>
+                    <input type="checkbox" class="checkBox" name="checkList" value=<%= i %>>
+                   </td>
+                   <%} if(i==15){%>
+                        <td></td>
+                        <%}%>
+                   <%};%>
+
+
+                </tr>
+
+                
+            </table>
+            </div>
 <br>
-<div id="screen">Screen This Way</div>
+            
+    </td>
+</tr>
+
+</table>
+<br><br>
+<div id="btn">
+<button type="submit" class="btn btn-primary">Book Now</button>
+</div>
+</form>
+<br><br>

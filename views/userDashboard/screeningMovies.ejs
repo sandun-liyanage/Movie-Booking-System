@@ -35,14 +35,17 @@
         <% if(data.length){ for(var i = 0; i< data.length; i++) {%>  
                 
                 <tr>
-                    <td rowspan="8" style="padding: 1em;"><img src="<%=data[i].img %>" alt="Movie Poster" width="300" height="350"></td>
+                    <td rowspan="9" style="padding: 1em;"><img src="<%=data[i].img %>" alt="Movie Poster" width="300" height="350"></td>
                     <td></td>
-                    <td rowspan="8" style="padding-top: 150px;">
+                    <td rowspan="9" style="padding-top: 150px;">
                         <a href="/reservation/bookMovie?movieName=<%= data[i].movieName %>">Book</a>
                     </td>
                 </tr>
                 <tr>
                     <td>Movie Name: <%= data[i].movieName %></td>
+                </tr>
+                <tr>
+                    <td>Date: <%= data[i].date %></td>
                 </tr>
                 <tr>
                     <td>Time Slot: <%= data[i].timeSlot %></td>

@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Movie = require('../models/movies')
+const Reservation = require('../models/reservation')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const methodOverride = require("method-override")
@@ -17,7 +18,7 @@ router.get('/screeningMovies', (req, res) => {
     Movie.find((err, docs) => {
         if (!err) {
             //console.log(docs)
-            res.render("./userDashboard/screeningMovies", {data: docs});
+            res.render("./userDashboard/screeningMovies", {data: docs, message: req.flash('message')});
         } else {
             console.log('Failed to retrieve the movie List: ' + err);
         }
@@ -41,6 +42,7 @@ router.post('/addMovie', function (req, res) {
         username: req.body.movieName,
         movieName: req.body.movieName, 
         img: req.body.img, 
+        date: req.body.date,
         timeSlot: req.body.timeSlot,
         ratings: req.body.ratings,
         director: req.body.director,
@@ -51,11 +53,27 @@ router.post('/addMovie', function (req, res) {
             console.log(err)
             res.render('./adminDashboard/addMovies', {message: err})
         }else{
+            
             res.render('./adminDashboard/adminDashboard', {message: "movie added successfully"})
         } 
     })
-     
     
+    Reservation.insertMany (
+        new Reservation({
+            username: req.body.movieName,
+            movieName: req.body.movieName,
+            img: req.body.img,
+            date: req.body.date,
+            timeSlot: req.body.timeSlot
+        }), function (err, msg) {
+            if(err){
+                console.log(err)
+            }else{
+                console.log("movie added for reservation")
+            }
+        }
+    )
+
 })
 
 //updating a movies
