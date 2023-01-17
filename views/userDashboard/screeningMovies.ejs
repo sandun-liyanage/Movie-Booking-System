@@ -16,6 +16,18 @@
         margin-top: 1em;
         position: fixed;
     }
+    .bookBtn {
+    display: block;
+    text-decoration: none;
+    width: 115px;
+    height: 45px;
+    background: #144552;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+}
 </style>
 
 <% var message; if(message){ %>
@@ -38,7 +50,7 @@
                     <td rowspan="9" style="padding: 1em;"><img src="<%=data[i].img %>" alt="Movie Poster" width="300" height="350"></td>
                     <td></td>
                     <td rowspan="9" style="padding-top: 150px;">
-                        <a href="/reservation/bookMovie?movieName=<%= data[i].movieName %>">Book</a>
+                        <a class="bookBtn" href="/reservation/bookMovie?movieName=<%= data[i].movieName %>">Book</a>
                     </td>
                 </tr>
                 <tr>

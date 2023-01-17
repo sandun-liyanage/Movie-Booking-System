@@ -18,23 +18,28 @@ router.use(methodOverride('_method'))
 
 //load book movie page
 router.get('/bookMovie', async (req, res) => {
-    let movieName = req.query.movieName
+    if(req.isAuthenticated()){
+        let movieName = req.query.movieName
     
-    Movie.findOne({movieName: movieName}, function(err, movie){
-        if(err){
-            console.log(err)
-        }else{
-            console.log(movie)
-            res.render('./userDashboard/bookMovie', {
-                movieName: movie.movieName, 
-                date: movie.date,
-                timeSlot: movie.timeSlot, 
-                img: movie.img,
-                name: req.user.username,
-                seats: movie.seats
-            }) 
-        }
-    })
+        Movie.findOne({movieName: movieName}, function(err, movie){
+            if(err){
+                console.log(err)
+            }else{
+                console.log(movie)
+                res.render('./userDashboard/bookMovie', {
+                    movieName: movie.movieName, 
+                    date: movie.date,
+                    timeSlot: movie.timeSlot, 
+                    img: movie.img,
+                    name: req.user.username,
+                    seats: movie.seats
+                }) 
+            }
+        })
+    }else{
+        req.flash('message', "please login before making reservations")
+        res.redirect('/movies/screeningMovies')
+    }
     
     
 })
@@ -42,39 +47,46 @@ router.get('/bookMovie', async (req, res) => {
 
 //book the movies
 router.post('/bookMovie', async (req,res) => {
-    
-    Movie.updateMany({'movieName': req.query.movieName}, {'seats' : req.body.checkList, 'bookingName': req.user.username}, 
-    function (err, success){
-        if(err){
-            console.log(err)
-        }else{
-            console.log("booked seats updated in database")
-        }
-    }) 
-    
-    Movie.findOne({'movieName': req.query.movieName}, function(err, movie){
-        if(err){
-            console.log(err)
-        }else{
-            Reservation.insertMany(
-                new Reservation({
-                    bookingName: req.user.username,
-                    movieName: movie.movieName,
-                    img: movie.img,
-                    date: movie.date,
-                    timeSlot: movie.timeSlot,
-                    seats: req.body.checkList
-                }), function(err, success){
-                    if(err){
-                        res.render('./userDashboard/screeningMovies', {message: err})
-                    }else{
-                        req.flash('message', "successfully booked the movie. you can check your booking details in your profile.")
-                        res.redirect('/movies/screeningMovies')
+
+    if(req.isAuthenticated()){
+        Movie.updateMany({'movieName': req.query.movieName}, {'seats' : req.body.checkList, 'bookingName': req.user.username}, 
+        function (err, success){
+            if(err){
+                console.log(err)
+            }else{
+                console.log("booked seats updated in database")
+            }
+        }) 
+        
+        Movie.findOne({'movieName': req.query.movieName}, function(err, movie){
+            if(err){
+                console.log(err)
+            }else{
+                Reservation.insertMany(
+                    new Reservation({
+                        bookingName: req.user.username,
+                        movieName: movie.movieName,
+                        img: movie.img,
+                        date: movie.date,
+                        timeSlot: movie.timeSlot,
+                        seats: req.body.checkList
+                    }), function(err, success){
+                        if(err){
+                            res.render('./userDashboard/screeningMovies', {message: err})
+                        }else{
+                            req.flash('message', "successfully booked the movie. you can check your booking details in your profile.")
+                            res.redirect('/movies/screeningMovies')
+                        }
                     }
-                }
-            )
-        }
-    })
+                )
+            }
+        })
+    }else{
+        req.flash('message', "please login before making reservations")
+        res.redirect('/movies/screeningMovies')
+    }
+    
+
 })
 
 

@@ -1,3 +1,6 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
 <% var message; if(message){ %>
     <div class="alert alert-success" role="alert">
         <%= message %>
@@ -40,7 +43,16 @@
     input.checkBox {
         width : 2em;
         height : 2em;
+        accent-color: red;
     }
+    input.checkBox[disabled] {
+        background: red;
+        color: green;
+        height: 5em;
+    }
+    input[type="checkbox"]:disabled + label::before{
+  background: gray;
+}
 </style>
 
 <br><br>
@@ -104,16 +116,15 @@
                 <tr>
                     <td> <br>A</td>
                    <%for(var i=1;i<=10;i++){%>
-                    <% //for(var j=0; j<seats.length;j++){ %> 
                    <% if(seats.includes(i)){ %>
                    <td>
                     <br>
-                       <input type="checkbox" class="checkBox" disabled name="checkList" value=<%= i %>>
+                       <input type="checkbox" class="checkBox" disabled name="checkList" id="checkList" onclick="onToggle()" value=<%= i %>>
                    </td>
                    <%} else {%>
                    <td>
                     <br>
-                    <input type="checkbox" class="checkBox" name="checkList" value=<%= i %>>
+                    <input type="checkbox" class="checkBox" name="checkList" id="checkList" onclick="onToggle(value)" value=<%= i %>>
                    </td>
                    <%}if(i==5){%>
                         <td></td>
@@ -129,12 +140,12 @@
                    <% if(seats.includes(i)){%>
                    <td>
                     <br>
-                    <input type="checkbox" class="checkBox" disabled name="checkList" value=<%= i %>>
+                    <input type="checkbox" class="checkBox" disabled name="checkList" id="checkList" onclick="onToggle()" value=<%= i %>>
                    </td>
                    <%} else {%>
                    <td>
                     <br>
-                    <input type="checkbox" class="checkBox" name="checkList" value=<%= i %>>
+                    <input type="checkbox" class="checkBox" name="checkList" id="checkList" onclick="onToggle(value)" value=<%= i %>>
                    </td>
                    <%} if(i==15){%>
                         <td></td>
@@ -159,3 +170,23 @@
 </div>
 </form>
 <br><br>
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io();
+
+    function onToggle(i) {
+        socket.emit('seats', i);
+    }   
+    
+    socket.on('seats', function(sts) {
+        var checkBox = document.getElementsByName('checkList');
+        
+        if(checkBox[sts-1].disabled == false){
+            checkBox[sts-1].disabled = true;
+        }else{
+            checkBox[sts-1].disabled = false;
+        }
+    });
+</script>

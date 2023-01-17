@@ -24,12 +24,12 @@ router.use(express.urlencoded({extended: true}));
 //----------------------user login----------------------//
 
 router.get('/userLogin', (req, res) => {
-    res.render('./users/userLogin')
+    res.render('./users/userLogin',  {message: req.flash('message')})
 })
 
   
 router.post('/userLogin', passport.authenticate('local', {
-    successRedirect: '../',
+    successRedirect: '/movies/screeningMovies',
     failureRedirect: '/authenticate/userLogin',
     failureFlash: true
 }))
@@ -44,15 +44,15 @@ router.get('/userSignup', (req, res) => {
 router.post('/userSignup', function (req, res) {
     User.register(
         new User({ 
-            username: req.body.username, 
-            email: req.body.email 
+            email: req.body.email,
+            username: req.body.username
         }), req.body.password, function (err, msg) {
             if (err) { 
                 req.flash('message', err.message)
                 res.redirect('/authenticate/userSignup')
             } else { 
                 req.flash('message', 'successfully signed up to the system')
-                res.redirect('../')
+                res.redirect('/')
             }
         }
     )

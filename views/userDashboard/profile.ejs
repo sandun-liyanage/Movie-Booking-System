@@ -1,0 +1,92 @@
+<% var message; if(message){ %>
+    <div class="alert alert-success" role="alert">
+        <%= message %>
+    </div>
+<% } %>
+
+
+<style>
+    td{
+        width:350px;
+        color: white;
+        font-size: 20px;
+    }
+    #outerDiv {
+        width: 70%;
+        margin: auto;
+        background-color: rgba(0,0,0, 0.6);
+        padding: 3em;
+    }
+    body {
+        background-image: url('/profile.jpg');
+        background-size: cover;
+        color: white;
+    }
+    #btn {
+        float: right;
+        margin-left: 85em;
+        margin-top: 1em;
+        position: fixed;
+    }
+    h1,h4 {
+        text-align: center;
+    }
+    hr {
+        height: 10px;
+        top: 20px;
+        background: red;
+    }
+</style>
+
+
+
+
+<form action="/authenticate/logout?_method=DELETE" method="post">
+    <button class="btn btn-success" id="btn">Logout</button>
+</form>
+
+<div id="outerDiv">
+    <h1>User Profile</h1>
+    <hr>
+    <h4>Welcome back <%= userName %>. Here are your movie reservations with iMax Cinema.</h4><br>
+<table class="table table-borderless">
+    
+    <tbody>
+        <% if(data.length){ for(var i = 0; i< data.length; i++) {%>  
+                
+                <tr>
+                    <td rowspan="7" style="padding: 1em;"><img src="<%=data[i].img %>" alt="Movie Poster" width="300" height="350"></td>
+                    <td></td>
+                    <td rowspan="7" style="padding-top: 150px;">
+                        
+                    </td>
+                </tr>
+                <tr>
+                    <td>Movie Name : <%= data[i].movieName %></td>
+                </tr>
+                <tr>
+                    <td>Screening Date : <%= data[i].date %></td>
+                </tr>
+                <tr>
+                    <td>Screening Time : <%= data[i].timeSlot %></td>
+                </tr>
+                <tr>
+                    <td>Number of Seats : <%= data[i].seats.length %></td>
+                </tr>
+                <tr>
+                    <td>Seat Numbers : <%= data[i].seats %></td>
+                </tr>
+                <tr>
+                    <td><hr></td>
+                </tr>
+                
+            <% }}else{ %>
+            <tr>
+                <td colspan="3">No user</td>
+            </tr>
+            <% } %>     
+    </tbody>
+</table>
+</div>
+<br><br>
+

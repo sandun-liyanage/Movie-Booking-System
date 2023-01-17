@@ -19,6 +19,13 @@ const app = express()
 const MongoStore = require('connect-mongo')
 const connectEnsureLogin = require('connect-ensure-login');// authorization
 
+
+const http = require('http');
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(server);
+
+
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
@@ -59,11 +66,13 @@ const indexRouter = require('./routes/index')
 const authenticateRouter = require('./routes/authenticate')
 const moviesRouter = require('./routes/movies')
 const reservationRouter = require('./routes/reservation')
+const userProfileRouter = require('./routes/userProfile')
 
 app.use('/', indexRouter)
 app.use('/authenticate', authenticateRouter)
 app.use('/movies', moviesRouter)
 app.use('/reservation', reservationRouter)
+app.use('/userProfile', userProfileRouter)
 
 
 mongoose.set('strictQuery', true)
@@ -76,10 +85,22 @@ db.once('open', () => {
 })
 
 
+io.on('connection', (socket) => {
+  console.log('new user connected')
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+
+  socket.on('seats', (sts) => {
+    //console.log('seats: ' + sts);
+    socket.broadcast.emit('seats', sts);
+  });
+
+});
 
 
 
-app.listen(3000, () => console.log('Server started at 3000'))
+server.listen(3000, () => console.log('Server started at 3000'))
 
 
 
