@@ -91,4 +91,19 @@ router.post('/bookMovie', async (req,res) => {
 
 
 
+
+//view user reservations - for admin
+router.get('/userReservations', (req,res) => {
+    Reservation.find({movieName: req.query.movieName}, function(err,reserv){
+        if(reserv[0] == undefined){
+            req.flash('message', "no reservations for the selected movie.")
+            res.redirect('/movies/manageMovies')
+        }else{
+            res.render('./adminDashboard/userReservations', {reserv: reserv})
+        }
+    })
+})
+
+
+
 module.exports = router

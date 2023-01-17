@@ -13,7 +13,7 @@ router.use(express.urlencoded({ extended: true }));
 router.use(methodOverride('_method'))
 
 
-//getting all movies
+//getting all movies for user
 router.get('/screeningMovies', (req, res) => {
     Movie.find((err, docs) => {
         if (!err) {
@@ -25,12 +25,20 @@ router.get('/screeningMovies', (req, res) => {
     });
 })
 
-/*
-//getting one movie
-router.get('/:id', (req, res) => {
 
+//getting movies for admin
+router.get('/manageMovies', (req, res) => {
+    Movie.find((err, docs) => {
+        if (!err) {
+            //console.log(docs)
+            res.render("./adminDashboard/manageMovies", {data: docs, message: req.flash('message')});
+        } else {
+            console.log('Failed to retrieve the movie List: ' + err);
+        }
+    });
 })
-*/
+
+
 //creating a movie
 router.get('/addMovie', (req, res) => {
     res.render('./adminDashboard/addMovies')
@@ -57,7 +65,7 @@ router.post('/addMovie', function (req, res) {
             res.render('./adminDashboard/adminDashboard', {message: "movie added successfully"})
         } 
     })
-    
+    /*
     Reservation.insertMany (
         new Reservation({
             username: req.body.movieName,
@@ -72,13 +80,20 @@ router.post('/addMovie', function (req, res) {
                 console.log("movie added for reservation")
             }
         }
-    )
+    )*/
 
 })
 
 //updating a movies
 router.get('/updateMovie', (req, res) => {
-    res.render('./adminDashboard/updateMovies')
+    Movie.findOne({movieName: req.query.movieName}, function(err,mov){
+        if(err){
+            res.render('./adminDashboard/manageMovies', {message: err})
+        }else{
+            res.render('./adminDashboard/updateMovies', {movie: mov})
+        }
+    })
+    
 })
 
 router.patch('/updateMovie', (req, res) => {
@@ -87,7 +102,8 @@ router.patch('/updateMovie', (req, res) => {
             if(err){
                 res.render('./adminDashboard/updateMovies', {message: err})
             }else{
-                res.render('./adminDashboard/adminDashboard', {message: "successfully updated movie details"})
+                req.flash('message', "successfully updated movie details")
+                res.redirect('/movies/manageMovies')
             }
     })
 })
@@ -97,18 +113,17 @@ router.patch('/updateMovie', (req, res) => {
 //deleting a movies
 
 router.get('/deleteMovie', (req, res) => {
-    res.render('./adminDashboard/deleteMovies')
-})
-
-
-router.delete('/deleteMovie', (req, res) => {
-    Movie.deleteMany({'movieName' : req.body.movieName}, function(err, success){
+    Movie.deleteMany({'movieName' : req.query.movieName}, function(err, success){
         if(err){
-            res.render('./adminDashboard/deleteMovies', {message: err})
+            req.flash('message', err)
+            res.redirect('/movies/manageMovies')
         }else{
-            res.render('./adminDashboard/adminDashboard', {message: "successfully deleted movie details"})
+            req.flash('message', "successfully deleted movie details")
+            res.redirect('/movies/manageMovies')
         }
     })
 })
+
+
 
 module.exports = router

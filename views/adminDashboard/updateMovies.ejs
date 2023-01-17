@@ -1,3 +1,4 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
 <style>
     #outerDiv {
@@ -19,19 +20,19 @@
     <form action="/movies/updateMovie?_method=PATCH" method="post" >
         <div class="mb-3">
             <label for="movieName" class="form-label">Movie Name</label>
-            <input type="text" class="form-control border border-danger-subtle" id="movieName" name="movieName">
+            <input type="text" value="<%= movie.movieName %>" class="form-control border border-danger-subtle" id="movieName" name="movieName">
         </div>
         <div class="mb-3">
             <label for="img" class="form-label">Image URL</label>
-            <input type="text" class="form-control border border-danger-subtle" id="img" name="img">
+            <input type="text" value="<%= movie.img %>" class="form-control border border-danger-subtle" id="img" name="img">
         </div>
         <div class="mb-3">
             <label for="date" class="form-label">Date</label>
-            <input type="date" class="form-control border border-danger-subtle" id="date" name="date">
+            <input type="date" value="<%= movie.date %>" class="form-control border border-danger-subtle" id="date" name="date">
         </div>
-        <div class="mb-3">
-            <select name="timeSlot" id="timeSlot" class="form-select border border-danger-subtle" aria-label="Default select example">
-                <option selected>Choose a time slot</option>
+        <div class="mb-3">Time Slot
+            <select name="timeSlot" value="<%= movie.timeSlo %>" id="timeSlot" class="form-select border border-danger-subtle" aria-label="Default select example">
+                <option selected> <%= movie.timeSlot %> </option>
                 <option value="9.30 AM">9.30 AM</option>
                 <option value="12.30 PM">12.30 PM</option>
                 <option value="3.30 PM">3.30PM</option>
@@ -42,21 +43,29 @@
         <div class="preview-images"></div>
         <div class="mb-3">
             <label for="ratings" class="form-label">Ratings</label>
-            <input type="text" class="form-control border border-danger-subtle" id="ratings" name="ratings">
+            <input type="text" value="<%= movie.ratings %>" class="form-control border border-danger-subtle" id="ratings" name="ratings">
         </div>
         <div class="mb-3">
             <label for="director" class="form-label">Director</label>
-            <input type="text" class="form-control border border-danger-subtle" id="director" name="director">
+            <input type="text" value="<%= movie.director %>" class="form-control border border-danger-subtle" id="director" name="director">
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
-            <input type="text" class="form-control border border-danger-subtle" id="description" name="description">
+            <input type="text" value="<%= movie.description %>" class="form-control border border-danger-subtle" id="description" name="description">
         </div>
         <div class="mb-3">
             <label for="duration" class="form-label">Duration</label>
-            <input type="text" class="form-control border border-danger-subtle" id="duration" name="duration">
+            <input type="text" value="<%= movie.duration %>" class="form-control border border-danger-subtle" id="duration" name="duration">
         </div>
             <button type="submit" class="btn btn-primary">Submit</button>
     </form>
     </div>
 
+<script>
+    window.onload= function(){
+        var date= document.getElementById("date");
+        var time = document.getElementById("timeSlot")
+
+        //date.value = movi
+    }
+</script>

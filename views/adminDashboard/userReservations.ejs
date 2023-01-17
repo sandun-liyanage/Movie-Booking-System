@@ -1,0 +1,70 @@
+<% var message; if(message){ %>
+    <div class="alert alert-success" role="alert">
+        <%= message %>
+    </div>
+<% } %>
+
+<% var messages; if (messages.error) { %>
+    <div class="alert alert-success" role="alert">
+    <%= messages.error %>
+    </div>
+<% } %>
+
+
+<style>
+    h1,h3 {
+        text-align: center;
+    }
+    body {
+        background-image: url('/userReservations.jpg');
+        background-size: cover;
+        color: white;
+    }
+    td, th{
+        width:350px;
+        font-size: 20px;
+    }
+    #outerDiv {
+        width: 70%;
+        margin: auto;
+        background-color: rgba(0,0,0, 0.8);
+        padding: 3em;
+    }
+    #detailsDiv {
+        float: right;
+    }
+    #imgDiv, #detailsDiv {
+        width: 400px;
+        display: inline-block;
+    }
+</style>
+
+<br>
+<div id="outerDiv">
+    <h1>Reservations of <%= reserv[0].movieName %> </h1>
+    <h3><%= reserv[0].date %> at <%= reserv[0].timeSlot %></h3>
+
+    
+    <br>
+    <div>
+    <div id="imgDiv">
+        <img src="<%= reserv[0].img %>" alt="Movie Poster" width="400" height="450">
+    </div>
+    <div id="detailsDiv">
+        <br><br>
+        <table class="table table-striped table-hover table-dark">
+            <tr>
+                <th>Name</th>
+                <th>Seat Numbers</th>
+            </tr>
+            <% for(i=0; i<reserv.length; i++){ %> 
+            <tr>
+                <td><%= reserv[i].bookingName %></td>
+                <td><%= reserv[i].seats %></td>
+            </tr>
+            <% } %> 
+        </table>
+    </div>
+    </div>
+</div>
+<br>
