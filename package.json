@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "devStart": "nodemon server.js"
+    "devStart": "nodemon server.js",
+    "test": "mocha --timeout 10000000"
   },
   "author": "BSU Liyanage",
   "license": "ISC",
@@ -13,6 +14,7 @@
     "alert": "^5.1.4",
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.1",
+    "chai-http": "^4.3.0",
     "connect-ensure-login": "^0.1.1",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^4.6.0",
@@ -21,7 +23,9 @@
     "express-ejs-layouts": "^2.5.1",
     "express-flash": "^0.0.2",
     "express-session": "^1.17.3",
+    "loadtest": "^5.2.0",
     "method-override": "^3.0.0",
+    "mocha": "^10.2.0",
     "mongoose": "^6.8.2",
     "passport": "^0.6.0",
     "passport-hash": "^0.6.1",
@@ -31,7 +35,9 @@
     "socket.io": "^4.5.4"
   },
   "devDependencies": {
+    "chai": "^4.3.7",
     "dotenv": "^16.0.3",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "loadtest": "*"
   }
 }

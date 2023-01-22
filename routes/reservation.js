@@ -47,7 +47,7 @@ router.get('/bookMovie', async (req, res) => {
 
 //book the movies
 router.post('/bookMovie', async (req,res) => {
-
+    
     if(req.isAuthenticated()){
         Movie.updateMany({'movieName': req.query.movieName}, {'seats' : req.body.checkList, 'bookingName': req.user.username}, 
         function (err, success){

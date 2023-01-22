@@ -82,6 +82,7 @@ db.on('error', (error) => console.error(error))
 db.once('open', () => {
     console.log('database connected')
     admin.insertMany({"username": "admin" , "password" : "admin"})
+    db.emit('database connected')
 })
 
 
@@ -100,7 +101,13 @@ io.on('connection', (socket) => {
 
 
 
-server.listen(3000, () => console.log('Server started at 3000'))
+server.listen(3000, () => {
+  console.log('Server started at 3000')
+  server.emit('server started')
+})
+
+
+module.exports = server;
 
 
 

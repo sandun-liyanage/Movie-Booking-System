@@ -61,7 +61,7 @@ router.post('/addMovie', function (req, res) {
             console.log(err)
             res.render('./adminDashboard/addMovies', {message: err})
         }else{
-            
+            res.status(201)
             res.render('./adminDashboard/adminDashboard', {message: "movie added successfully"})
         } 
     })
@@ -118,6 +118,7 @@ router.get('/deleteMovie', (req, res) => {
             req.flash('message', err)
             res.redirect('/movies/manageMovies')
         }else{
+            //res.json({'message': "successfully deleted movie details"})
             req.flash('message', "successfully deleted movie details")
             res.redirect('/movies/manageMovies')
         }

@@ -4,7 +4,7 @@ var moviesSchema=mongoose.Schema(
 {
 	movieName: {type: String, required: true},
 	img: {type: String, required: true},
-	date: String,
+	date: {type: String, required: true},
 	timeSlot: {type: String, required: true},
 	ratings: Number,
 	director: String,
