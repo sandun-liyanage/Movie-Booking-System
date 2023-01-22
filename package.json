@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "devStart": "nodemon server.js",
-    "test": "mocha --timeout 10000000"
+    "test": "mocha --timeout 10000000 --exit"
   },
   "author": "BSU Liyanage",
   "license": "ISC",
