@@ -84,6 +84,7 @@ router.post('/addMovie', function (req, res) {
 
 })
 
+
 //updating a movies
 router.get('/updateMovie', (req, res) => {
     Movie.findOne({movieName: req.query.movieName}, function(err,mov){

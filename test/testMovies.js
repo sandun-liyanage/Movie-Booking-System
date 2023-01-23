@@ -44,6 +44,7 @@ describe('testing API with database', function() {
 
 
 
+    
     it('should add a movie on /movies POST', function(done) {
         chai.request(server)
             .post('/movies/addMovie')

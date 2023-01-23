@@ -91,7 +91,6 @@ router.post('/bookMovie', async (req,res) => {
 
 
 
-
 //view user reservations - for admin
 router.get('/userReservations', (req,res) => {
     Reservation.find({movieName: req.query.movieName}, function(err,reserv){
