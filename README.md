@@ -16,6 +16,6 @@ Testing Automation: The repository includes automated tests to ensure the stabil
 
 Technologies Used
 Node.js: A JavaScript runtime used for server-side development.
-Express.js: A web application framework for Node.js, providing a robust set of features for building web applications.
+Express.js: A web application framework for Node.js, providing a robust set of features for building web applications
 MongoDB: A NoSQL database used for storing movie, user, and reservation data.
 WebSocket: A communication protocol enabling real-time, bidirectional communication between the server and multiple clients.
